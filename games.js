@@ -2,6 +2,15 @@
 
 const GAMES = [
   {
+    name: "RC Rally",
+    url: "https://schreys.github.io/rc-rally/",
+    img: "img/rc-rally.jpg",
+    desc: "Race met een 4WD RC-buggy vanaf de rijdersstand. Jumps, drifts en over de kop. Xbox-controller werkt ook.",
+    tags: ["Racing", "3D", "Gamepad"],
+    color: "#29d3ff",
+    test: true,
+  },
+  {
     name: "Bomb Sweeper",
     url: "https://schreys.github.io/bomb-sweeper-v2/",
     img: "img/bomb-sweeper.jpg",
@@ -75,6 +84,13 @@ for (const g of GAMES) {
     badge.title = "Draait op een gratis server die even moet opstarten";
     shot.append(badge);
   }
+  if (g.test) {
+    const badge = document.createElement("span");
+    badge.className = "badge test";
+    badge.textContent = "IN TESTFASE";
+    badge.title = "Nog volop in ontwikkeling: feedback welkom!";
+    shot.append(badge);
+  }
 
   const body = document.createElement("div");
   body.className = "body";
@@ -103,7 +119,12 @@ document.addEventListener("keydown", (e) => {
   const cards = [...grid.children];
   const i = cards.indexOf(document.activeElement);
   const cols = getComputedStyle(grid).gridTemplateColumns.split(" ").length;
-  const step = { ArrowRight: 1, ArrowLeft: -1, ArrowDown: cols, ArrowUp: -cols }[e.key];
+  const step = {
+    ArrowRight: 1,
+    ArrowLeft: -1,
+    ArrowDown: cols,
+    ArrowUp: -cols,
+  }[e.key];
   if (!step) return;
   e.preventDefault();
   const next = i < 0 ? 0 : Math.min(cards.length - 1, Math.max(0, i + step));
